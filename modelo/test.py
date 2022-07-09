@@ -40,7 +40,7 @@ def run_test(sess, model, batch_gen, data):
         try:
             bpred, bloss = sess.run([model.batch_pred, model.batch_loss], input_feed)
         except:
-            print "la excepción ocurre en un paso válido : " + str(test_itr)
+            print("la excepción ocurre en un paso válido : " + str(test_itr))
             pass
         
         # remaining data case (last iteration)

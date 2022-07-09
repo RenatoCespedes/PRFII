@@ -22,7 +22,7 @@ class ProcessDataAudio:
         
     def load_data(self, audio_mfcc, mfcc_seqN, audio_prosody, label):
      
-        print 'cargando datos : ' + audio_mfcc + ' ' +  mfcc_seqN + ' ' + audio_prosody + ' ' + label
+        print('cargando datos : ' + audio_mfcc + ' ' +  mfcc_seqN + ' ' + audio_prosody + ' ' + label)
         output_set = []
 
         tmp_audio_mfcc          = np.load(self.data_path + audio_mfcc)
@@ -32,25 +32,12 @@ class ProcessDataAudio:
 
         for i in xrange( len(tmp_label) ) :
             output_set.append( [tmp_audio_mfcc[i], tmp_mfcc_seqN[i], tmp_audio_prosody[i], tmp_label[i]] )
-        print '[completado] datos cargados'
+        print('[completado] datos cargados')
         
         return output_set
         
     
-    """
-        inputs: 
-            data             : data to be processed (train/dev/test)
-            batch_size    : mini-batch size
-            encoder_size : max encoder time step
-            
-            is_test           : True, inference stage (ordered input)  ( default : False )
-            start_index     : start index of mini-batch
-        return:
-            encoder_input   : [batch, time_step(==encoder_size), mfcc_dim]
-            encoder_seq     : [batch] - valid mfcc step
-            encoder_prosody         : [batch, prosody_dim] 
-            labels               : [batch, category] - category is one-hot vector
-    """
+   
     def get_batch(self, data, batch_size, encoder_size, is_test=False, start_index=0):
 
         encoder_inputs, encoder_seq, encoder_prosody, labels = [], [], [], []

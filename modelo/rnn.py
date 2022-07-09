@@ -41,7 +41,7 @@ class SingleEncoderModelAudio:
     
 
     def _create_placeholders(self):
-        print '[launch-audio] placeholders'
+        print('[launch-audio] placeholders')
         with tf.name_scope('audio_placeholder'):
             
             self.encoder_inputs  = tf.placeholder(tf.float32, shape=[self.batch_size, self.encoder_size, N_AUDIO_MFCC], name="encoder")  # [batch, time_step, audio]
@@ -67,7 +67,7 @@ class SingleEncoderModelAudio:
     
     
     def _create_gru_model(self):
-        print '[launch-audio] create gru cell'
+        print('[launch-audio] create gru cell')
 
         with tf.name_scope('audio_RNN') as scope:
         
@@ -88,13 +88,13 @@ class SingleEncoderModelAudio:
         
         
     def _add_prosody(self):
-        print '[launch-audio] add prosody feature, dim: ' + str(N_AUDIO_PROSODY)
+        print('[launch-audio] add prosody feature, dim: ' + str(N_AUDIO_PROSODY))
         self.final_encoder = tf.concat( [self.final_encoder, self.encoder_prosody], axis=1 )
         self.final_encoder_dimension = self.hidden_dim + N_AUDIO_PROSODY
         
         
     def _create_output_layers(self):
-        print '[launch-audio] create output projection layer'        
+        print('[launch-audio] create output projection layer')
         
         with tf.name_scope('audio_output_layer') as scope:
 
@@ -120,7 +120,7 @@ class SingleEncoderModelAudio:
                     
 
     def _create_output_layers_for_multi(self):
-        print '[launch-audio] create output projection layer for multi'        
+        print('[launch-audio] create output projection layer for multi' )
         
         with tf.name_scope('audio_output_layer') as scope:
 
@@ -141,7 +141,7 @@ class SingleEncoderModelAudio:
                 
                 
     def _create_optimizer(self):
-        print '[launch-audio] create optimizer'
+        print('[launch-audio] create optimizer')
         
         with tf.name_scope('audio_optimizer') as scope:
             opt_func = tf.train.AdamOptimizer(learning_rate=self.lr)
@@ -151,7 +151,7 @@ class SingleEncoderModelAudio:
     
     
     def _create_summary(self):
-        print '[launch-audio] create summary'
+        print('[launch-audio] create summary')
         
         with tf.name_scope('summary'):
             tf.summary.scalar('mean_loss', self.loss)
