@@ -79,7 +79,8 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                 dev_ce, dev_accr, dev_summary, _ = run_test(sess=sess,
                                                          model=model, 
                                                          batch_gen=batch_gen,
-                                                         data=batch_gen.dev_set)
+                                                         data=batch_gen.dev_set,
+                                                         name_group= (data_path).split('/')[-2])
                 
                 writer.add_summary( dev_summary, global_step=model.global_step.eval() )
                 

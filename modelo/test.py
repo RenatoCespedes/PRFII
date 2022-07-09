@@ -6,7 +6,7 @@ from scipy.stats import rankdata
 from conf_proyecto import *
 import os
 
-def run_test(sess, model, batch_gen, data):
+def run_test(sess, model, batch_gen, data, name_group):
     
     list_batch_ce = []
     list_batch_correct = []
@@ -56,14 +56,12 @@ def run_test(sess, model, batch_gen, data):
         list_pred.extend( np.argmax(bpred, axis=1) )
         list_label.extend( np.argmax(raw_label, axis=1) )
      
-    cont=0
     if IS_LOGGING:
-        while(os.path.exists('../analysis/audio'+str(cont)+'.txt')==True and os.path.exists('../analysis/audio_label'+str(cont)+'.txt')== True):
-            cont=cont+1
-        with open( '../analysis/audio'+str(cont)+'.txt', 'w' ) as f:
+        
+        with open( '../analysis/audio'+str(name_group)+'.txt', 'w' ) as f:
             f.write( ' '.join( [str(x) for x in list_pred] ) )
 
-        with open( '../analysis/audio_label'+str(cont)+'.txt', 'w' ) as f:
+        with open( '../analysis/audio_label'+str(name_group)+'.txt', 'w' ) as f:
             f.write( ' '.join( [str(x) for x in list_label] ) )   
         
             
