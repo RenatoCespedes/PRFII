@@ -33,7 +33,7 @@ def train_step(sess, model, batch_gen):
     return summary
 
     
-def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_dir_name='default'):
+def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_dir_name='default',prefix='default'):
     
     saver = tf.train.Saver()
     config = tf.ConfigProto()
@@ -80,7 +80,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                                                          model=model, 
                                                          batch_gen=batch_gen,
                                                          data=batch_gen.dev_set,
-                                                         name_group= (data_path).split('/')[-2])
+                                                         name_group=prefix+'_dev', )
                 
                 writer.add_summary( dev_summary, global_step=model.global_step.eval() )
                 
@@ -100,7 +100,8 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                         test_ce, test_accr, _, _ = run_test(sess=sess,
                                                          model=model,
                                                          batch_gen=batch_gen,
-                                                         data=batch_gen.test_set)
+                                                         data=batch_gen.test_set,
+                                                         name_group=prefix+'_test', )
                         
                         best_dev_accr = dev_accr
                         test_accr_at_best_dev = test_accr
@@ -138,7 +139,7 @@ def create_dir(dir_name):
         
 def main(data_path, batch_size, encoder_size, num_layer, hidden_dim, 
          num_train_steps, lr, is_save, graph_dir_name,
-         dr
+         dr,prefix
          ):
     
     if is_save is 1:
@@ -164,7 +165,7 @@ def main(data_path, batch_size, encoder_size, num_layer, hidden_dim,
     valid_freq = int( len(batch_gen.train_set) * EPOCH_PER_VALID_FREQ / float(batch_size)  ) + 1
     print("[Info] Valid Freq = " + str(valid_freq))
 
-    train_model(model, batch_gen, num_train_steps, valid_freq, is_save, graph_dir_name)
+    train_model(model, batch_gen, num_train_steps, valid_freq, is_save, graph_dir_name,prefix)
     
 if __name__ == '__main__':
     
@@ -185,7 +186,7 @@ if __name__ == '__main__':
     
     
     args = p.parse_args()
-    
+    prefix= (args.data_path).split('/')[-2]
     graph_name = args.graph_prefix + \
                     '_D' + (args.data_path).split('/')[-2] + \
                     '_b' + str(args.batch_size) + \
@@ -206,5 +207,6 @@ if __name__ == '__main__':
         lr=args.lr,
         is_save=args.is_save,
         graph_dir_name=graph_name,
-        dr=args.dr        
+        dr=args.dr,
+        prefix=prefix        
         )
