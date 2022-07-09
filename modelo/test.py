@@ -14,8 +14,8 @@ def run_test(sess, model, batch_gen, data):
     list_pred = []
     list_label = []
 
-    max_loop  = len(data) / model.batch_size
-    remaining = len(data) % model.batch_size
+    max_loop  = int(len(data) / model.batch_size)
+    remaining = int(len(data) % model.batch_size)
 
     # Evalua los datos ( N of chunk (batch_size) + remaining( +1) )
     for test_itr in range( max_loop + 1 ):
