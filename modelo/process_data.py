@@ -30,7 +30,7 @@ class ProcessDataAudio:
         tmp_audio_prosody     = np.load(self.data_path + audio_prosody)
         tmp_label                   = np.load(self.data_path + label)
 
-        for i in xrange( len(tmp_label) ) :
+        for i in range( len(tmp_label) ) :
             output_set.append( [tmp_audio_mfcc[i], tmp_mfcc_seqN[i], tmp_audio_prosody[i], tmp_label[i]] )
         print('[completado] datos cargados')
         
@@ -46,7 +46,7 @@ class ProcessDataAudio:
         # Get a random batch of encoder and encoderR inputs from data,
         # pad them if needed
 
-        for _ in xrange(batch_size):
+        for _ in range(batch_size):
 
             if is_test is False:
                 # train case -  random sampling

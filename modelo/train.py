@@ -61,7 +61,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
         best_dev_accr = 0
         test_accr_at_best_dev = 0
         
-        for index in xrange(num_train_steps):
+        for index in range(num_train_steps):
 
             try:
                 # run train 
