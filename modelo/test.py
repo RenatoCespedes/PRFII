@@ -58,7 +58,7 @@ def run_test(sess, model, batch_gen, data):
      
     cont=0
     if IS_LOGGING:
-        while(os.path.exists('analysis/audio'+str(cont)+'.txt')==True and os.path.exists('analysis/audio_label'+str(cont)+'.txt')== True):
+        while(os.path.exists('../analysis/audio'+str(cont)+'.txt')==True and os.path.exists('../analysis/audio_label'+str(cont)+'.txt')== True):
             cont=cont+1
         with open( '../analysis/audio'+str(cont)+'.txt', 'w' ) as f:
             f.write( ' '.join( [str(x) for x in list_pred] ) )
