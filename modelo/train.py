@@ -4,7 +4,7 @@ import time
 import argparse
 import datetime
 
-from SE_model_audio import *
+from rnn import *
 from process_data import *
 from test import *
 from conf_proyecto import *

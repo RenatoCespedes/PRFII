@@ -4,7 +4,7 @@ from tensorflow.contrib.rnn import DropoutWrapper
 
 from tensorflow.core.framework import summary_pb2
 from random import shuffle
-from project_config import *
+from conf_proyecto import *
 
 
 class SingleEncoderModelAudio:
