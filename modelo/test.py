@@ -18,7 +18,7 @@ def run_test(sess, model, batch_gen, data):
     remaining = len(data) % model.batch_size
 
     # Evalua los datos ( N of chunk (batch_size) + remaining( +1) )
-    for test_itr in xrange( max_loop + 1 ):
+    for test_itr in range( max_loop + 1 ):
         
         raw_encoder_inputs, raw_encoder_seq, raw_encoder_prosody, raw_label = batch_gen.get_batch(
                                         data=data,
