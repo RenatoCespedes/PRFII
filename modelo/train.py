@@ -115,7 +115,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                         test_accr = 0
                         early_stop_count = early_stop_count -1
                         
-                print(str( int(end_time - initial_time)/60 ) + " mins" + \
+                    print(str( int(end_time - initial_time)/60 ) + " mins" + \
                         " step/seen/itr: " + str( model.global_step.eval() ) + "/ " + \
                                                str( model.global_step.eval() * model.batch_size ) + "/" + \
                                                str( round( model.global_step.eval() * model.batch_size / float(len(batch_gen.train_set)), 2)  ) + \
@@ -162,7 +162,8 @@ def main(data_path, batch_size, encoder_size, num_layer, hidden_dim,
 
     model.build_graph()
     
-    valid_freq = int( len(batch_gen.train_set) * EPOCH_PER_VALID_FREQ / float(batch_size)  ) + 1
+    # valid_freq = int( len(batch_gen.train_set) * EPOCH_PER_VALID_FREQ / float(batch_size)  ) + 1
+    valid_freq=1
     print("[Info] Valid Freq = " + str(valid_freq))
 
     train_model(model, batch_gen, num_train_steps, valid_freq, is_save, graph_dir_name,prefix)
