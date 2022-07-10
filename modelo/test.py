@@ -70,7 +70,7 @@ def run_test(sess, model, batch_gen, data, name_group):
     list_batch_correct = [1 for x, y in zip(list_pred,list_label) if x==y]
     
     sum_batch_ce = np.sum( list_batch_ce )  / float( len(data) )
-    print('Test CE: ' + str(sum_batch_ce))
+    # print('Test CE: ' + str(sum_batch_ce))
     accr = np.sum ( list_batch_correct ) / float( len(data) )
     
     value1 = summary_pb2.Summary.Value(tag="valid_loss", simple_value=sum_batch_ce)
