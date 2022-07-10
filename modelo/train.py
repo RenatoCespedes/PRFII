@@ -105,6 +105,8 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                         
                         best_dev_accr = dev_accr
                         test_accr_at_best_dev = test_accr
+                        with open( '../analysis/losstest.txt', 'w' ) as f:
+                            f.write(str(index) + ' '+ str(test_ce) + '\n' )
                                                                                             
                     else:
                         # early stopping
@@ -120,7 +122,9 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                                                str( model.global_step.eval() * model.batch_size ) + "/" + \
                                                str( round( model.global_step.eval() * model.batch_size / float(len(batch_gen.train_set)), 2)  ) + \
                         "\tdev: " + '{:.3f}'.format(dev_accr)  + "  test: " + '{:.3f}'.format(test_accr) + "  loss: " + '{:.2f}'.format(dev_ce) )
-                
+
+                with open( '../analysis/lossdev.txt', 'w' ) as f:
+                    f.write(str(index) + ' '+ str(dev_ce) + '\n' )    
         writer.close()
             
         print('Total de pasos : {}'.format(model.global_step.eval()) )
@@ -131,8 +135,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                     batch_gen.data_path.split('/')[-2] + '\t' + \
                     graph_dir_name + '\t' + str(best_dev_accr) + '\t' + str(test_accr_at_best_dev) + '\n')
 
-        with open( '../analysis/loss'+str(name_group)+'.txt', 'w' ) as f:
-        f.write( ' '.join( dev_ce ) )    
+            
 
 
 def create_dir(dir_name):
