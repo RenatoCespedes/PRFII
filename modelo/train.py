@@ -131,6 +131,9 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                     batch_gen.data_path.split('/')[-2] + '\t' + \
                     graph_dir_name + '\t' + str(best_dev_accr) + '\t' + str(test_accr_at_best_dev) + '\n')
 
+        with open( '../analysis/loss'+str(name_group)+'.txt', 'w' ) as f:
+        f.write( ' '.join( dev_ce ) )    
+
 
 def create_dir(dir_name):
     if not os.path.isdir(dir_name):
