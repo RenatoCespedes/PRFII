@@ -66,7 +66,8 @@ def run_test(sess, model, batch_gen, data, name_group):
             f.write( ' '.join( [str(x) for x in list_label] ) )   
         
             
-        
+    with open( '../analysis/loss'+str(name_group)+'.txt', 'w' ) as f:
+        f.write( ' '.join( [str(x) for x in list_batch_ce] ) )    
     list_batch_correct = [1 for x, y in zip(list_pred,list_label) if x==y]
     
     sum_batch_ce = np.sum( list_batch_ce )  / float( len(data) )
