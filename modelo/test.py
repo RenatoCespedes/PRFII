@@ -51,7 +51,7 @@ def run_test(sess, model, batch_gen, data, name_group):
         
         # batch loss
         list_batch_ce.extend( bloss )
-        print("loss: " , '{:.2f}'.format(bloss) )
+        print(bloss.type)
         # batch accuracy
         list_pred.extend( np.argmax(bpred, axis=1) )
         list_label.extend( np.argmax(raw_label, axis=1) )
