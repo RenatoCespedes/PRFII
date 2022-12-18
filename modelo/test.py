@@ -59,10 +59,10 @@ def run_test(sess, model, batch_gen, data, name_group):
      
     if IS_LOGGING:
         
-        with open( '../analysis/audio'+str(name_group)+'.txt', 'w' ) as f:
+        with open( '../analysis/audio'+str(name_group)+'.txt', 'a' ) as f:
             f.write( ' '.join( [str(x) for x in list_pred] ) )
 
-        with open( '../analysis/audio_label'+str(name_group)+'.txt', 'w' ) as f:
+        with open( '../analysis/audio_label'+str(name_group)+'.txt', 'a' ) as f:
             f.write( ' '.join( [str(x) for x in list_label] ) )   
         
             
