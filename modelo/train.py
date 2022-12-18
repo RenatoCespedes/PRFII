@@ -105,7 +105,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                         
                         best_dev_accr = dev_accr
                         test_accr_at_best_dev = test_accr
-                        with open( '../analysis/losstest'+prefix+'.txt', 'w' ) as f:
+                        with open( '../analysis/losstest'+prefix+'.txt', 'a' ) as f:
                             f.write(str(index) + ' '+ str(test_ce) + '\n' )
                                                                                             
                     else:
@@ -123,7 +123,7 @@ def train_model(model, batch_gen, num_train_steps, valid_freq, is_save=0, graph_
                                                str( round( model.global_step.eval() * model.batch_size / float(len(batch_gen.train_set)), 2)  ) + \
                         "\tdev: " + '{:.3f}'.format(dev_accr)  + "  test: " + '{:.3f}'.format(test_accr) + "  loss: " + '{:.2f}'.format(dev_ce) )
 
-                with open( '../analysis/lossdev'+prefix+'.txt', 'w' ) as f:
+                with open( '../analysis/loss_dev'+prefix+'.txt', 'a' ) as f:
                     f.write(str(index) + ' '+ str(dev_ce) + '\n' )    
         writer.close()
             
